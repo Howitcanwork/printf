@@ -1,4 +1,5 @@
 #include "main.h"
+void pr_buff(char buffer[], int *buffer_index);
 
 /**
  * _printf - produces output according to a format
@@ -8,77 +9,53 @@
 
 int _printf(const char *format, ...)
 {
-	int chara_print = 0;
-	va_list argument;
-	char c;
-	char *s;
-	int d;
-	int j;
-	int leng;
-	char buffer[11];
+	int chara_printed = 0;
+	int i;
+	int pr = 0;
+	int size = 0;
+	int buffer_index = 0;
+	char buffer[BUFF_SIZE];
+	va_list argus;
 
 	if (format == NULL)
 		return (-1);
-	va_start(argument, format);
+	va_start(argus, format);
 
-	while (*format != '\0')
+	for (i = 0; format && format[i] != '\0'; i++)
 	{
-		if (*format != '%')
+		if (format[i] != '%')
 		{
-			write(1, format, 1);
-			chara_print++;
+			buffer[buffer_index++] = format[i];
+			if (buffer_index == BUFF_SIZE)
+				pr_buff(buffer, &buffer_index);
+			chara_printed++;
 		}
 		else
-			format++;
-		if (*format == '%')
 		{
-			write(1, format, 1);
-			chara_print++;
-		}
-		else if (*format == 'c')
-		{
-			c = va_arg(argument, int);
-			write(1, &c, 1);
-			chara_print++;
-		}
-		else if (*format == 's')
-		{
-			s = va_arg(argument, char *);
-			leng = 0;
-			while (s[leng] != '\0')
-				leng++;
-			write(1, s, leng);
-			chara_print += leng;
-		}
-		else if (*format == 'd' || *format == 'i')
-		{
-			d = va_arg(argument, int);
-			if (d < 0)
-			{
-				write(1, "-", 1);
-				chara_print++;
-				d = -d;
-			}
-			j = 0;
-			if (d == 0)
-			{
-				buffer[j] = '0';
-				j++;
-			}
-			while (d > 0)
-			{
-				buffer[j] = (d % 10) + '0';
-				j++;
-				d /= 10;
-			}
-			while (j > 0)
-			{
-				j--;
-				write(1, &buffer[j], 1);
-				chara_print;
-			}
+			pr_buff(buffer, &buffer_index);
+			size = get_size(format, &i);
+			++i;
+			pr = handle_specifiers(format, &i, argus, buffer, size);
+			if (pr == -1)
+				return (-1);
+			chara_printed += pr;
 		}
 	}
-	va_end(argument);
-	return (chara_print);
+	pr_buff(buffer, &buffer_index);
+
+	va_end(argus);
+
+	return (chara_printed);
+}
+
+/**
+ * pr_buff - prints the buffer
+ * @buffer: array
+ * @buffer_index: length
+ */
+void pr_buff(char buffer[], int *buffer_index)
+{
+	if (buffer_index > 0)
+		write(1, &buffer[0], &buffer_index);
+	*buffer_index = 0;
 }
