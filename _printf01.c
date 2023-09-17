@@ -1,6 +1,14 @@
 #include "main.h"
 
 /**
+ * main - Entry point
+ * Description - printf project
+ * Return: 0
+ */
+
+int main(void)
+{
+/**
  *  * _print_simple - print %
  *   * @std: standard output
  *    * @string: string we wanna print
@@ -91,4 +99,5 @@ int _printf(const char *format, ...)
 	}
 	va_end(argu);
 	return (chara_print);
+}
 }
