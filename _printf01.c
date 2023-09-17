@@ -1,84 +1,94 @@
 #include "main.h"
 
 /**
- * _printf - produces output according to a format
- * @format: chracter string
- * Return: number of character printed
- */
+ *  * _print_simple - print %
+ *   * @std: standard output
+ *    * @string: string we wanna print
+ *     * @leng: lenght
+ *      * Return: VOID
+ *       */
+void _print_simple(int std, const char *string, int leng)
+{
+	write(std, string, leng);
+}
+
+/**
+ *  * _specifiers - solution for specifiers
+ *   * @std: standard output
+ *    * @specf: specifier
+ *     * @argu: location
+ *      * @chara_print: return value
+ *       * Return: characters printed
+ *        */
+
+
+void _specifiers(int std, char specf, va_list argu, int *chara_print)
+{
+	char c, *s;
+	char buff[3];
+	int i;
+
+	buff[0] = '%';
+	buff[1] = specf;
+	buff[2] = '\0';
+	switch (specf)
+	{
+		case 'c':
+			c = (char)va_arg(argu, int);
+			_print_simple(std, &c, 1);
+			*chara_print += 1;
+			break;
+		case 's':
+			s = va_arg(argu, char *);
+			_pr_str(std, s, chara_print);
+			break;
+		case '%':
+			_pr_perc(std, chara_print);
+			break;
+		case 'd':
+			i = va_arg(argu, int);
+
+			_pr_num(std, i, chara_print);
+			break;
+		case 'i':
+			i = va_arg(argu, int);
+			_pr_num(std, i, chara_print);
+			break;
+		default:
+			_print_simple(std, buff, 2);
+			*chara_print += 2;
+			break;
+	}
+}
+/**
+ *  * _printf - produces output according to a format
+ *   * @format: character string
+ *    * Return: number of characters printed
+ *     */
 
 int _printf(const char *format, ...)
 {
+	va_list argu;
 	int chara_print = 0;
-	va_list argument;
-	char c;
-	char *s;
-	int d;
-	int j;
-	int leng;
-	char buffer[11];
 
 	if (format == NULL)
 		return (-1);
-	va_start(argument, format);
+	va_start(argu, format);
 
 	while (*format != '\0')
 	{
-		if (*format != '%')
-		{
-			write(1, format, 1);
-			chara_print++;
-		}
-		else
-			format++;
 		if (*format == '%')
 		{
-			write(1, format, 1);
+			format++;
+			_specifiers(1, *format, argu, &chara_print);
+		}
+		else
+		{
+			_print_simple(1, format, 1);
 			chara_print++;
 		}
-		else if (*format == 'c')
-		{
-			c = va_arg(argument, int);
-			write(1, &c, 1);
-			chara_print++;
-		}
-		else if (*format == 's')
-		{
-			s = va_arg(argument, char *);
-			leng = 0;
-			while (s[leng] != '\0')
-				leng++;
-			write(1, s, leng);
-			chara_print += leng;
-		}
-		else if (*format == 'd' || *format == 'i')
-		{
-			d = va_arg(argument, int);
-			if (d < 0)
-			{
-				write(1, "-", 1);
-				chara_print++;
-				d = -d;
-			}
-			j = 0;
-			if (d == 0)
-			{
-				buffer[j] = '0';
-				j++;
-			}
-			while (d > 0)
-			{
-				buffer[j] = (d % 10) + '0';
-				j++;
-				d /= 10;
-			}
-			while (j > 0)
-			{
-				j--;
-				write(1, &buffer[j], 1);
-				chara_print;
-			}
-		}
+		format++;
 	}
-	va_end(argument);
+	va_end(argu);
 	return (chara_print);
 }
