@@ -7,7 +7,7 @@
  * Return: number of char printed
  */
 
-int pr_bi(va_list a, fg_t *g)
+int pr_bi(va_list a, flags_t *g)
 {
 	unsigned int u = va_arg(a, unsigned int);
 	char *s = convert(u, 10, 0);
@@ -24,7 +24,7 @@ int pr_bi(va_list a, fg_t *g)
  * Return: number of char printed
  */
 
-int pr_octal(va_list a, fg_t *g)
+int pr_octal(va_list a, flags_t *g)
 {
 	unsigned int num = va_arg(a, unsigned int);
 	char *s = convert(num, 8, 0);
@@ -44,7 +44,7 @@ int pr_octal(va_list a, fg_t *g)
  * Return: number of character printed
  */
 
-int pr_hex(va_list a, fg_t *g)
+int pr_hex(va_list a, flags_t *g)
 {
 	unsigned int num = va_arg(a, unsigned int);
 	char *s = convert(num, 16, 1);
@@ -64,7 +64,7 @@ int pr_hex(va_list a, fg_t *g)
  * Return: number of char printed
  */
 
-int pr_hex_big(va_list a, fg_t *g)
+int pr_hex_big(va_list a, flags_t *g)
 {
 	unsigned int num = va_arg(a, unsigned int);
 	vhar *s = convert(num, 16, 0);

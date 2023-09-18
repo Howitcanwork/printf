@@ -7,8 +7,8 @@
 int _printf(const char *format, ...)
 {
 	const char *m;
-	int (*pr)(va_list, fg_t *);
-	fg_t fg = {0,0,0};
+	int (*pr)(va_list, flags_t *);
+	fg_t flags = {0,0,0};
 	va_list argus;
 	register int leng = 0;
 
@@ -28,11 +28,11 @@ int _printf(const char *format, ...)
 				leng += _write('%');
 				continue;
 			}
-			while (_flag(*m, &fg))
+			while (_flag(*m, &flags))
 				m++;
 			pr = _pr_spf(*m);
 			leng += (pr)
-				? pr(argus, &fg)
+				? pr(argus, &flags)
 				: _printf("%%%c",*m);
 		}
 		else
