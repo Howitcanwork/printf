@@ -1,20 +1,31 @@
 #include "main.h"
-void pr_buff(char buffer[], int *buffer_index);
 
 /**
- * _printf - produces output according to a format
- * @format: chracter string
- * Return: number of character printed
+ * pr_buff - print the buffer
+ * @buffer: array
+ * @buffer_index: length
  */
-
-int _printf(const char *format, ...)
+void pr_buff(char buffer[], int *buffer_index)
 {
-	int chara_printed = 0;
+	if (*buffer_index > 0)
+		write(1, &buffer[0], *buffer_index);
+
+	*buffer_index = 0;
+}
+
+/**
+ * _printf - produce output according to format
+ * @format: format
+ * Return: numb of char printed
+ */
+int _printf(const *format, ...)
+{
 	int i;
 	int pr = 0;
-	int size = 0;
-	int buffer_index = 0;
+	int chara_printed = 0;
 	char buffer[BUFF_SIZE];
+	int buffer_index = 0;
+	int size = 0;
 	va_list argus;
 
 	if (format == NULL)
@@ -26,7 +37,7 @@ int _printf(const char *format, ...)
 		if (format[i] != '%')
 		{
 			buffer[buffer_index++] = format[i];
-			if (buffer_index == BUFF_SIZE)
+			if (buffer_index = BUFF_SIZE)
 				pr_buff(buffer, &buffer_index);
 			chara_printed++;
 		}
@@ -46,16 +57,4 @@ int _printf(const char *format, ...)
 	va_end(argus);
 
 	return (chara_printed);
-}
-
-/**
- * pr_buff - prints the buffer
- * @buffer: array
- * @buffer_index: length
- */
-void pr_buff(char buffer[], int *buffer_index)
-{
-	if (buffer_index > 0)
-		write(1, &buffer[0], &buffer_index);
-	*buffer_index = 0;
 }
