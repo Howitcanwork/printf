@@ -1,60 +1,44 @@
 #include "main.h"
-
 /**
- * pr_buff - print the buffer
- * @buffer: array
- * @buffer_index: length
- */
-void pr_buff(char buffer[], int *buffer_index)
-{
-	if (*buffer_index > 0)
-		write(1, &buffer[0], *buffer_index);
-
-	*buffer_index = 0;
-}
-
-/**
- * _printf - produce output according to format
+ * _printf - produces output according to a format
  * @format: format
- * Return: numb of char printed
+ * Return: number of char printed
  */
-int _printf(const *format, ...)
+int _printf(const char *format, ...)
 {
-	int i;
-	int pr = 0;
-	int chara_printed = 0;
-	char buffer[BUFF_SIZE];
-	int buffer_index = 0;
-	int size = 0;
+	const char *m;
+	int (*pr)(va_list, fg_t *);
+	fg_t fg = {0,0,0};
 	va_list argus;
+	register int leng = 0;
 
-	if (format == NULL)
-		return (-1);
 	va_start(argus, format);
 
-	for (i = 0; format && format[i] != '\0'; i++)
+	if (!format || (!format[1] && format[0] == '%'))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (m = format; *m; m++)
 	{
-		if (format[i] != '%')
+		if (*m == '%')
 		{
-			buffer[buffer_index++] = format[i];
-			if (buffer_index = BUFF_SIZE)
-				pr_buff(buffer, &buffer_index);
-			chara_printed++;
+			m++;
+			if (*m == '%')
+			{
+				leng += _write('%');
+				continue;
+			}
+			while (_flag(*m, &fg))
+				m++;
+			pr = _pr_spf(*m);
+			leng += (pr)
+				? pr(argus, &fg)
+				: _printf("%%%c",*m);
 		}
 		else
-		{
-			pr_buff(buffer, &buffer_index);
-			size = get_size(format, &i);
-			++i;
-			pr = handle_specifiers(format, &i, argus, buffer, size);
-			if (pr == -1)
-				return (-1);
-			chara_printed += pr;
-		}
+			leng += _write(*m);
 	}
-	pr_buff(buffer, &buffer_index);
-
+	_write(-1);
 	va_end(argus);
-
-	return (chara_printed);
+	return (leng);
 }
