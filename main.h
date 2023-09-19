@@ -5,27 +5,27 @@
 #include <stdarg.h>
 
 /**
- * struct flags - struct containing flags
+ * struct flags_t - struct containing flags
  * @plus: '+' character
  * @space: ' ' character
  * @hash: '#' character
  */
 typedef struct flags_t
 {
-        int plus;
-        int space;
-        int hash;
+	int plus;
+	int space;
+	int hash;
 } flags_t;
 
 /**
- * struct printHandler - struct
+ * struct ph - struct
  * @c: format specifier
  * @f: pointer to the correct printing function
  */
 typedef struct ph
 {
-        char c;
-        int (*f)(va_list ap, flags_t *f);
+	char c;
+	int (*f)(va_list ap, flags_t *f);
 } ph;
 
 

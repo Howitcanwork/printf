@@ -8,8 +8,9 @@ int _printf(const char *format, ...)
 {
 	const char *m;
 	int (*pr)(va_list, flags_t *);
-	flags_t flags = {0,0,0};
+	flags_t flags = {0, 0, 0};
 	va_list argus;
+
 	register int leng = 0;
 
 	va_start(argus, format);
@@ -33,7 +34,7 @@ int _printf(const char *format, ...)
 			pr = _pr_spf(*m);
 			leng += (pr)
 				? pr(argus, &flags)
-				: _printf("%%%c",*m);
+				: _printf("%%%c", *m);
 		}
 		else
 			leng += _write(*m);
