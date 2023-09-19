@@ -6,7 +6,7 @@
  * Return: pointer
  */
 
-int (_pr_spf(char sp))(va_list, flags_t)
+int (*_pr_spf(char sp))(va_list, flags_t *)
 {
 	int fg = 14;
 
