@@ -8,7 +8,7 @@ int _printf(const char *format, ...)
 {
 	const char *m;
 	int (*pr)(va_list, flags_t *);
-	fg_t flags = {0,0,0};
+	flags_t flags = {0,0,0};
 	va_list argus;
 	register int leng = 0;
 

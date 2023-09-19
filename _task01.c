@@ -25,7 +25,7 @@ int pr_string(va_list a, flag_t *g)
  * Return: number of char printed
  */
 
-int pr_char(va_list a, flag_t *g)
+int pr_char(va_list a, flags_t *g)
 {
 	(void)g;
 
@@ -41,7 +41,7 @@ int pr_char(va_list a, flag_t *g)
  * Return: number of char printed
  */
 
-int pr_percent(va_list a, flag_t *g)
+int pr_percent(va_list a, flags_t *g)
 {
 	(void)a;
 	(void)g;
