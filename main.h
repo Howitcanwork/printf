@@ -9,6 +9,8 @@
  * @plus: '+' character
  * @space: ' ' character
  * @hash: '#' character
+ * @zero: '0' character
+ * @minus: '-' character
  */
 typedef struct flags_t
 {
