@@ -1,4 +1,4 @@
-#include "main.h"
+o#include "main.h"
 
 /**
  * _flag - turns on flag
@@ -13,20 +13,20 @@ int _flag(char sp, flags_t *g)
 
 	switch (sp)
 	{
-		case '+';
-		g->plud = 1;
-		j = 1;
-		break;
+		case '+':
+			g->plus = 1;
+			j = 1;
+			break;
 
-		case ' ';
-		g->space = 1;
-		j = 1;
-		break;
+		case ' ':
+			g->space = 1;
+			j = 1;
+			break;
 
-		case '#';
-		g->hash = 1;
-		j = 1;
-		break;
+		case '#':
+			g->hash = 1;
+			j = 1;
+			break;
 	}
 	return (j);
 }

@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * pr_bi - prints number in base 2
+ * pr_unsigned - prints number in base 2
  * @a: argument
  * @g: pointer
  * Return: number of char printed
  */
 
-int pr_bi(va_list a, flags_t *g)
+int pr_unsigned(va_list a, flags_t *g)
 {
 	unsigned int u = va_arg(a, unsigned int);
 	char *s = convert(u, 10, 0);
@@ -32,7 +32,7 @@ int pr_octal(va_list a, flags_t *g)
 
 	if (g->hash == 1 && s[0] != '0')
 		leng += _write('0');
-	leng += _write_str(str);
+	leng += _write_str(s);
 
 	return (leng);
 }
@@ -67,12 +67,12 @@ int pr_hex(va_list a, flags_t *g)
 int pr_hex_big(va_list a, flags_t *g)
 {
 	unsigned int num = va_arg(a, unsigned int);
-	vhar *s = convert(num, 16, 0);
+	char *s = convert(num, 16, 0);
 	int leng = 0;
 
 	if (g->hash == 1 && s[0] != '0')
 		leng += _write_str("0X");
-	leng += _write_str(str);
+	leng += _write_str(s);
 
 	return (leng);
 }

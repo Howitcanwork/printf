@@ -7,7 +7,7 @@
  * Return: number of char printed
  */
 
-int pr_string(va_list a, flag_t *g)
+int pr_string(va_list a, flags_t *g)
 {
 	char *s = va_arg(a, char *);
 

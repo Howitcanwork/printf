@@ -15,11 +15,11 @@ int _flag(char m, flags_t *g);
 int pr_int(va_list a, flags_t *g);
 void pr_num(int n);
 int _length(int i);
-int pr_binary(va_list a, flags_t *g);
 int pr_unsigned(va_list a, flags_t *g);
+int pr_binary(va_list a, flags_t *g);
 int pr_octal(va_list a, flags_t *g);
 int pr_hex(va_list a, flags_t *g);
-int print_hex_big(va_list a, flags_t *g);
+int pr_hex_big(va_list a, flags_t *g);
 int pr_bigS(va_list a, flags_t *g);
 int pr_address(va_list a, flags_t *g);
 int pr_rev(va_list a, flags_t *g);
@@ -42,10 +42,12 @@ typedef struct flags
 /**
  * struct printSpecifier - struct
  * @c: format specifier
- * @f: pointer to the correct printing function
+ * @g: pointer to the correct printing function
  */
 typedef struct printSpecifier
 {
 	char c;
-	int (*f)(va_list a, flags_t *f);
+	int (*g)(va_list ap, flags_t *g);
 } ph;
+
+#endif

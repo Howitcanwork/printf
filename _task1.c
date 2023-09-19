@@ -64,7 +64,7 @@ int _length(int i)
 	while (y != 0)
 	{
 		y /= 10;
-		x++
+		x++;
 	}
 
 	return (x);

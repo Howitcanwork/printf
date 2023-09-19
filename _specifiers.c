@@ -8,7 +8,7 @@
 
 int (*_pr_spf(char sp))(va_list, flags_t *)
 {
-	int fg = 14;
+	int flags = 14;
 
 	register int x;
 
@@ -29,8 +29,8 @@ int (*_pr_spf(char sp))(va_list, flags_t *)
 		{'p', pr_address}
 		};
 
-	for (x = 0; x < fg; x++)
+	for (x = 0; x < flags; x++)
 		if (specifier_array[x].c == sp)
-			return (specifier_array[x].f);
+			return (specifier_array[x].g);
 	return (NULL);
 }
