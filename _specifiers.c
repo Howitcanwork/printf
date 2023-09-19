@@ -8,16 +8,13 @@
 
 int (*_pr_spf(char sp))(va_list, flags_t *)
 {
-	int flags = 14;
-
-	register int x;
 
 	ph specifier_array[] = {
 		{'c', pr_char},
 		{'s', pr_string},
 		{'%', pr_percent},
 		{'d', pr_int},
-		{'i', pt_int},
+		{'i', pr_int},
 		{'u', pr_unsigned},
 		{'x', pr_hex},
 		{'X', pr_hex_big},
@@ -29,8 +26,12 @@ int (*_pr_spf(char sp))(va_list, flags_t *)
 		{'p', pr_address}
 		};
 
+	int flags = 14;
+
+	register int x;
+
 	for (x = 0; x < flags; x++)
 		if (specifier_array[x].c == sp)
-			return (specifier_array[x].g);
+			return (specifier_array[x].f);
 	return (NULL);
 }

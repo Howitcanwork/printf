@@ -4,11 +4,11 @@
  * convert - converts numbers into strings
  * @n: number
  * @b: base
- * @ls: lowercase
+ * @lc: lowercase
  * Return: string
  */
 
-char *convert(unsigned long int n, int b, int ls)
+char *convert(unsigned long int n, int b, int lc)
 {
 	static char *x;
 	static char buffer[50];
@@ -17,7 +17,7 @@ char *convert(unsigned long int n, int b, int ls)
 	x = (lc)
 		? "0123456789abcdef"
 		: "0123456789ABCDEF";
-	p = &buffer[49};
+	p = &buffer[49];
 	*p = '\0';
 	do {
 		*--p = x[n % b];

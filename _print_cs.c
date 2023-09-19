@@ -3,15 +3,15 @@
 /**
  * pr_string - print string
  * @a: arguments
- * @g: pointer
+ * @f: pointer
  * Return: number of char printed
  */
 
-int pr_string(va_list a, flags_t *g)
+int pr_string(va_list a, flags_t *f)
 {
 	char *s = va_arg(a, char *);
 
-	(void)g;
+	(void)f;
 
 	if (!s)
 		s = "(null)";
@@ -21,13 +21,13 @@ int pr_string(va_list a, flags_t *g)
 /**
  * pr_char - prints a char
  * @a: argument
- * @g: pointer
+ * @f: pointer
  * Return: number of char printed
  */
 
-int pr_char(va_list a, flags_t *g)
+int pr_char(va_list a, flags_t *f)
 {
-	(void)g;
+	(void)f;
 
 	_write(va_arg(a, int));
 
@@ -37,14 +37,14 @@ int pr_char(va_list a, flags_t *g)
 /**
  * pr_percent - prints a precent
  * @a: arguments
- * @g: pointer
+ * @f: pointer
  * Return: number of char printed
  */
 
-int pr_percent(va_list a, flags_t *g)
+int pr_percent(va_list a, flags_t *f)
 {
 	(void)a;
-	(void)g;
+	(void)f;
 
 	return (_write('%'));
 }

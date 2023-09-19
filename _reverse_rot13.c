@@ -3,17 +3,17 @@
 /**
  * pr_rev - print string in reverse
  * @a: arguments
- * @g: pointer
+ * @f: pointer
  * Return: length
  */
 
-int pr_rev(va_list a, flags_t *g)
+int pr_rev(va_list a, flags_t *f)
 {
 	int i = 0;
 	int j;
 	char *s = va_arg(a, char *);
 
-	(void)g;
+	(void)f;
 
 	if (!s)
 		s = "(null)";
@@ -27,18 +27,18 @@ int pr_rev(va_list a, flags_t *g)
 /**
  * pr_rot13 - print string using rot13
  * @a: arguments
- * @g: pointer
+ * @f: pointer
  * Return: length
  */
 
-int pr_rot13(va_list a, flags_t *g)
+int pr_rot13(va_list a, flags_t *f)
 {
 	int i, j;
 	char ROT13[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
 	char rot13[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	char *s = va_arg(a, char *);
 
-	(void)g;
+	(void)f;
 
 	for (j = 0; s[j]; j++)
 	{
